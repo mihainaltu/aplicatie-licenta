@@ -3,7 +3,7 @@ import User from "../models/userModel.js";
 import createJWT from "../utils/index.js";
 import Notice from "../models/notis.js";
 
-// POST request - login user
+
 const loginUser = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
 
@@ -37,7 +37,7 @@ const loginUser = asyncHandler(async (req, res) => {
   }
 });
 
-// POST - Register a new user
+
 const registerUser = asyncHandler(async (req, res) => {
   const { name, email, password, isAdmin, role, title } = req.body;
 
@@ -71,7 +71,7 @@ const registerUser = asyncHandler(async (req, res) => {
   }
 });
 
-// POST -  Logout user / clear cookie
+
 const logoutUser = (req, res) => {
   res.cookie("token", "", {
     httpOnly: true,
@@ -79,22 +79,6 @@ const logoutUser = (req, res) => {
   });
   res.status(200).json({ message: "Logged out successfully" });
 };
-
-// @GET -   Get user profile
-// const getUserProfile = asyncHandler(async (req, res) => {
-//   const { userId } = req.user;
-
-//   const user = await User.findById(userId);
-
-//   user.password = undefined;
-
-//   if (user) {
-//     res.json({ ...user });
-//   } else {
-//     res.status(404);
-//     throw new Error("User not found");
-//   }
-// });
 
 const getTeamList = asyncHandler(async (req, res) => {
   const { search } = req.query;
@@ -117,7 +101,7 @@ const getTeamList = asyncHandler(async (req, res) => {
   res.status(201).json(user);
 });
 
-// @GET  - get user notifications
+
 const getNotificationsList = asyncHandler(async (req, res) => {
   const { userId } = req.user;
 
@@ -131,7 +115,7 @@ const getNotificationsList = asyncHandler(async (req, res) => {
   res.status(201).json(notice);
 });
 
-// @GET  - get user notifications
+
 const markNotificationRead = asyncHandler(async (req, res) => {
   try {
     const { userId } = req.user;
@@ -156,7 +140,7 @@ const markNotificationRead = asyncHandler(async (req, res) => {
   }
 });
 
-// PUT - Update user profile
+
 const updateUserProfile = asyncHandler(async (req, res) => {
   const { userId, isAdmin } = req.user;
   const { _id } = req.body;
@@ -172,7 +156,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
 
   if (user) {
     user.name = req.body.name || user.name;
-    // user.email = req.body.email || user.email;
+    
     user.title = req.body.title || user.title;
     user.role = req.body.role || user.role;
 
@@ -190,7 +174,7 @@ const updateUserProfile = asyncHandler(async (req, res) => {
   }
 });
 
-// PUT - active/disactivate user profile
+
 const activateUserProfile = asyncHandler(async (req, res) => {
   const { id } = req.params;
 
@@ -217,7 +201,7 @@ const activateUserProfile = asyncHandler(async (req, res) => {
 const changeUserPassword = asyncHandler(async (req, res) => {
   const { userId } = req.user;
 
-  // Remove this condition
+  
   if (userId === "65ff94c7bb2de638d0c73f63") {
     return res.status(404).json({
       status: false,
@@ -243,7 +227,7 @@ const changeUserPassword = asyncHandler(async (req, res) => {
   }
 });
 
-// DELETE - delete user account
+
 const deleteUserProfile = asyncHandler(async (req, res) => {
   const { id } = req.params;
 

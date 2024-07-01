@@ -84,7 +84,7 @@ const MobileSidebar = () => {
 
 const App = () => {
   return (
-    <main className={theme}>
+    <main>
       <div className='w-full min-h-screen bg-[#f3f4f6] dark:bg-[#0d0d0df4]'>
         <Routes>
           <Route element={<Layout />}>
